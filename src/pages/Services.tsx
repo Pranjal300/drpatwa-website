@@ -171,7 +171,7 @@ const Services = () => {
                 <p className="text-muted-foreground leading-relaxed mb-4 pl-[52px]">{s.desc}</p>
                 {s.faq.length > 0 && (
                   <div className="pl-[52px] space-y-3">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">Frequently Asked</p>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">{t('services.faq')}</p>
                     {s.faq.map((f, j) => (
                       <div key={j} className="bg-secondary/50 rounded-lg p-4">
                         <p className="text-sm font-semibold mb-1">{f.q}</p>
