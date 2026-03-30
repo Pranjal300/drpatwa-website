@@ -5,10 +5,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/context/LanguageContext';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
 import doctorImg from '@/assets/doctor-1.png';
 
 const Index = () => {
   const { t, lang } = useLanguage();
+  const { data: settings } = useSiteSettings();
 
   const services = [
     { icon: Sparkles, title: t('service.acne'), desc: t('service.acne.desc') },
