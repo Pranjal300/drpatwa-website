@@ -102,7 +102,7 @@ const About = () => {
             <img src={doctorImg3} alt="Dr Patwa at clinic Prayagraj" className="w-full max-w-md mx-auto rounded-2xl shadow-lg" loading="lazy" decoding="async" />
             <div>
               <h2 className="font-serif font-bold mb-4 text-3xl">Philosophy & Approach</h2>
-              <p className="text-muted-foreground leading-relaxed mb-4 border-2 font-medium text-2xl">
+              <p className="text-muted-foreground leading-relaxed mb-4 font-medium text-base border-0">
                 Dr. Patwa believes in a holistic approach to dermatology — treating not just the symptoms but understanding the root cause of every skin and hair condition. He combines the latest medical research with personalized care plans tailored to each patient's unique needs.
               </p>
               <blockquote className="border-l-4 border-primary pl-4 italic text-lg text-foreground font-sans font-semibold">
