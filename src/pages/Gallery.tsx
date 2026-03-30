@@ -2,31 +2,41 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEOHead from '@/components/SEOHead';
 
+import gallery1 from '@/assets/gallery/gallery-1.png';
+import gallery2 from '@/assets/gallery/gallery-2.png';
+import gallery3 from '@/assets/gallery/gallery-3.png';
+import gallery4 from '@/assets/gallery/gallery-4.png';
+import gallery5 from '@/assets/gallery/gallery-5.png';
+import gallery6 from '@/assets/gallery/gallery-6.png';
+import gallery7 from '@/assets/gallery/gallery-7.png';
+import gallery8 from '@/assets/gallery/gallery-8.png';
+import gallery9 from '@/assets/gallery/gallery-9.png';
+import gallery10 from '@/assets/gallery/gallery-10.png';
+
 const categories = ['All', 'Acne', 'Hair', 'Skin', 'Anti-Aging'];
 
 const galleryItems = [
-  { id: 1, category: 'Acne', alt: 'Acne treatment before and after Prayagraj Dr Patwa' },
-  { id: 2, category: 'Acne', alt: 'Pimple treatment results skin specialist Prayagraj' },
-  { id: 3, category: 'Hair', alt: 'Hair transplant before after Dr Patwa Prayagraj' },
-  { id: 4, category: 'Hair', alt: 'Hair loss treatment results Prayagraj clinic' },
-  { id: 5, category: 'Skin', alt: 'Vitiligo treatment before after Prayagraj dermatologist' },
-  { id: 6, category: 'Skin', alt: 'Skin allergy treatment Dr Patwa clinic' },
-  { id: 7, category: 'Anti-Aging', alt: 'Anti aging treatment results Prayagraj' },
-  { id: 8, category: 'Anti-Aging', alt: 'Chemical peel before after Dr Patwa Prayagraj' },
-  { id: 9, category: 'Acne', alt: 'Acne scar treatment results dermatologist Allahabad' },
-  { id: 10, category: 'Hair', alt: 'PRP hair therapy results Prayagraj' },
-  { id: 11, category: 'Skin', alt: 'Eczema treatment before after Prayagraj' },
-  { id: 12, category: 'Anti-Aging', alt: 'Wrinkle treatment results skin clinic Prayagraj' },
+  { id: 1, src: gallery3, category: 'Hair', alt: 'Alopecia treatment before and after Dr Patwa Prayagraj' },
+  { id: 2, src: gallery4, category: 'Acne', alt: 'Acne treatment before and after result Prayagraj' },
+  { id: 3, src: gallery5, category: 'Skin', alt: 'Skin tag removal result Dr Patwa Prayagraj' },
+  { id: 4, src: gallery6, category: 'Skin', alt: 'Mole removal before and after Prayagraj dermatologist' },
+  { id: 5, src: gallery7, category: 'Anti-Aging', alt: 'Eyebrow cosmetic treatment result Prayagraj' },
+  { id: 6, src: gallery8, category: 'Anti-Aging', alt: 'Lip treatment before after healed Dr Patwa' },
+  { id: 7, src: gallery9, category: 'Hair', alt: 'Vitiligo hair treatment result Prayagraj clinic' },
+  { id: 8, src: gallery10, category: 'Acne', alt: 'Acne treatment result skin specialist Prayagraj' },
+  { id: 9, src: gallery1, category: 'Skin', alt: 'Skin treatment result Dr Patwa clinic Prayagraj' },
+  { id: 10, src: gallery2, category: 'Hair', alt: 'Hair treatment result Prayagraj dermatologist' },
 ];
 
 const Gallery = () => {
   const [active, setActive] = useState('All');
+  const [lightbox, setLightbox] = useState<number | null>(null);
   const filtered = active === 'All' ? galleryItems : galleryItems.filter(g => g.category === active);
 
   return (
     <>
       <SEOHead
-        title="Treatment Gallery | Dr. Patwa Skin Care & Hair Clinic Prayagraj"
+        title="Treatment Gallery | Dr. Patwa Skin Hair Laser Clinic Prayagraj"
         description="View before & after results of skin and hair treatments at Dr. Patwa's clinic in Prayagraj. Acne, hair transplant, vitiligo, and anti-aging results."
         canonical="https://drpatwa.com/gallery"
         schema={{
@@ -43,7 +53,7 @@ const Gallery = () => {
         <div className="container mx-auto px-4 lg:px-8 text-center">
           <h1 className="text-3xl lg:text-4xl font-serif font-bold mb-3">Treatment Results Gallery</h1>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Before & after results showcasing Dr. Patwa's expertise in dermatology and hair transplant procedures in Prayagraj.
+            Before & after results showcasing Dr. Patwa's expertise in dermatology and hair treatments in Prayagraj.
           </p>
         </div>
       </section>
@@ -78,17 +88,15 @@ const Gallery = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
-                  className="aspect-square rounded-lg overflow-hidden bg-muted border border-border"
+                  className="aspect-square rounded-lg overflow-hidden bg-muted border border-border cursor-pointer hover:shadow-lg transition-shadow"
+                  onClick={() => setLightbox(item.id)}
                 >
-                  <div className="w-full h-full flex items-center justify-center p-4 text-center">
-                    <div>
-                      <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-primary/10 flex items-center justify-center">
-                        <span className="text-primary text-lg font-bold">{item.category[0]}</span>
-                      </div>
-                      <p className="text-xs text-muted-foreground">{item.category} Treatment</p>
-                      <p className="text-[10px] text-muted-foreground/60 mt-1">Before & After</p>
-                    </div>
-                  </div>
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -99,6 +107,29 @@ const Gallery = () => {
           </p>
         </div>
       </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+            onClick={() => setLightbox(null)}
+          >
+            <motion.img
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              src={galleryItems.find(g => g.id === lightbox)?.src}
+              alt={galleryItems.find(g => g.id === lightbox)?.alt}
+              className="max-w-full max-h-[85vh] rounded-xl object-contain"
+              onClick={e => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

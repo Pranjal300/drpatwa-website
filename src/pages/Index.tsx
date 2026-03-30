@@ -33,10 +33,10 @@ const testimonials = [
 ];
 
 const faqs = [
-  { q: 'Who is the best dermatologist in Prayagraj?', a: 'Dr. D.K. Patwa is widely regarded as one of the best dermatologists in Prayagraj. With an MD in Dermatology from IMS-BHU, over 13 years of experience, and a 4.5-star rating from 500+ patients, he provides expert care for all skin, hair, and cosmetic concerns at his clinic in Tagore Town.' },
-  { q: 'What skin treatments are available at Dr. Patwa\'s clinic?', a: 'Dr. Patwa\'s clinic offers a comprehensive range of treatments including acne treatment, hair transplant surgery (FUE/FUT), hair loss/PRP therapy, skin allergy treatment, vitiligo management, anti-aging procedures, chemical peels, microdermabrasion, wart removal, fungal infection treatment, and eczema/psoriasis care.' },
-  { q: 'How do I book an appointment with Dr. D.K. Patwa?', a: 'You can book an appointment by calling +91 95602 94926, messaging on WhatsApp, or filling out the online booking form on our Contact page. Walk-in consultations are also available during clinic hours (Mon–Sat: 8–9 AM & 3:30–9 PM).' },
-  { q: 'What is the consultation fee at Dr. Patwa Skin Clinic?', a: 'Dr. Patwa offers affordable consultations. Please call the clinic at +91 95602 94926 for current consultation fees. The clinic provides quality dermatological care at reasonable prices for patients across Prayagraj and Allahabad.' },
+  { q: 'Who is the best dermatologist in Prayagraj?', a: 'Dr. D.K. Patwa is widely regarded as one of the best dermatologists in Prayagraj. With an MD in Dermatology from IMS-BHU, over 13 years of experience, and a 4.7-star rating from 426+ patients on Google, he provides expert care for all skin, hair, and cosmetic concerns at his clinic in Tagore Town.' },
+  { q: 'What skin treatments are available at Dr. Patwa\'s clinic?', a: 'Dr. Patwa\'s clinic offers a comprehensive range of treatments including acne treatment, hair transplant surgery (FUE/FUT), hair loss/PRP therapy, skin allergy treatment, vitiligo management, anti-aging procedures, chemical peels, laser treatments, microdermabrasion, wart removal, fungal infection treatment, and eczema/psoriasis care.' },
+  { q: 'How do I book an appointment with Dr. D.K. Patwa?', a: 'You can book an appointment by calling +91 89885 55540, messaging on WhatsApp, or filling out the online booking form on our Contact page. Walk-in consultations are also available during clinic hours (Mon–Sat: 8–9 AM & 3:30–9 PM).' },
+  { q: 'What is the consultation fee at Dr. Patwa Skin Clinic?', a: 'Dr. Patwa offers affordable consultations. Please call the clinic at +91 89885 55540 for current consultation fees. The clinic provides quality dermatological care at reasonable prices for patients across Prayagraj and Allahabad.' },
   { q: 'Does Dr. Patwa do hair transplant surgery?', a: 'Yes, Dr. D.K. Patwa is an experienced hair transplant surgeon in Prayagraj. He performs both FUE (Follicular Unit Extraction) and FUT (Follicular Unit Transplantation) procedures, delivering natural-looking results with minimal downtime.' },
 ];
 
@@ -54,7 +54,7 @@ const Index = () => (
   <>
     <SEOHead
       title="Dr. D.K. Patwa | Best Dermatologist in Prayagraj – Skin & Hair Specialist"
-      description="Consult Dr. D.K. Patwa, top-rated dermatologist in Prayagraj. Expert treatments for acne, hair loss, skin allergy, vitiligo, hair transplant & more. Book now: +91 95602 94926"
+      description="Consult Dr. D.K. Patwa, top-rated dermatologist in Prayagraj. Expert treatments for acne, hair loss, skin allergy, vitiligo, hair transplant & more. Book now: +91 89885 55540"
       canonical="https://drpatwa.com/"
       schema={faqSchema}
     />
@@ -71,10 +71,10 @@ const Index = () => (
               Best Dermatologist in Prayagraj – <span className="text-primary">Dr. D.K. Patwa</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-muted-foreground text-base lg:text-lg mb-2">
-              Expert Skin & Hair Care You Can Trust
+              Expert Skin, Hair, Laser & Aesthetic Care You Can Trust
             </motion.p>
             <motion.p variants={fadeUp} className="text-sm text-muted-foreground mb-6">
-              MBBS (AMU) • MD Dermatology (IMS-BHU) • 13+ Years Experience • ⭐ 4.5 Rated by Patients
+              MBBS (AMU) • MD Dermatology (IMS-BHU) • 13+ Years Experience • ⭐ 4.7 Rated (426+ Reviews)
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
               <Button asChild size="lg">
@@ -110,7 +110,7 @@ const Index = () => (
           {[
             { icon: Award, label: '13+ Years', sub: 'Experience' },
             { icon: Stethoscope, label: 'Advanced', sub: 'Technology' },
-            { icon: Users, label: '500+', sub: 'Happy Patients' },
+            { icon: Users, label: '426+', sub: 'Google Reviews' },
             { icon: Clock, label: 'Hindi & English', sub: 'Languages' },
           ].map((item, i) => (
             <div key={i} className="flex flex-col items-center gap-1">
@@ -131,7 +131,7 @@ const Index = () => (
             Skin Specialist in Tagore Town
           </motion.h2>
           <motion.p variants={fadeUp} className="text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive dermatology services for all your skin, hair, and cosmetic needs in Prayagraj.
+            Comprehensive dermatology services for all your skin, hair, laser, and aesthetic needs in Prayagraj.
           </motion.p>
         </motion.div>
 
@@ -168,7 +168,7 @@ const Index = () => (
               Dr. Dheeraj Kumar Patwa (D.K. Patwa) is a highly qualified dermatologist in Prayagraj with over 13 years of clinical experience. He completed his MBBS from Aligarh Muslim University (AMU) and MD in Dermatology from the prestigious Institute of Medical Sciences, BHU (IMS-BHU).
             </motion.p>
             <motion.p variants={fadeUp} className="text-muted-foreground mb-6 leading-relaxed">
-              As a member of the Cosmetic Dermatology Society of India (CDSI), Dr. Patwa stays at the forefront of dermatological advancements. He specializes in hair transplant surgery, acne treatment, anti-aging procedures, and comprehensive skin care for patients across Prayagraj and Allahabad.
+              As a member of the Cosmetic Dermatology Society of India (CDSI), Dr. Patwa stays at the forefront of dermatological advancements. He specializes in hair transplant surgery, acne treatment, laser procedures, anti-aging therapies, and comprehensive skin care for patients across Prayagraj and Allahabad.
             </motion.p>
             <motion.div variants={fadeUp}>
               <Button asChild variant="outline">
@@ -241,15 +241,15 @@ const Index = () => (
     <section className="py-16 lg:py-20">
       <div className="container mx-auto px-4 lg:px-8">
         <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center mb-3">
-          Advanced Skin Treatments in Allahabad
+          Visit Our Clinic in Prayagraj
         </h2>
         <p className="text-center text-muted-foreground mb-8 max-w-xl mx-auto">
-          Visit us at Tagore Town, Prayagraj for expert skin and hair consultation.
+          Dr. Patwa Skin Hair Laser and Aesthetic Clinic — Tagore Town, Prayagraj
         </p>
         <div className="rounded-xl overflow-hidden border shadow-sm">
           <iframe
-            title="Dr Patwa Skin Care Clinic Prayagraj"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d81.8463!3d25.4358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sTagore+Town+Prayagraj!5e0!3m2!1sen!2sin!4v1700000000000"
+            title="Dr Patwa Skin Hair Laser and Aesthetic Clinic Prayagraj"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d81.86506!3d25.456863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3985359fd2c6b88d%3A0x4351e3fa6e9aab12!2sDr.+Patwa+skin+hair+laser+and+aesthetic+clinic!5e0!3m2!1sen!2sin"
             width="100%"
             height="350"
             style={{ border: 0 }}
