@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Phone, MapPin, Clock, Send, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -61,7 +60,7 @@ const Contact = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10">
             {/* Form */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="animate-fade-in">
               <form onSubmit={handleSubmit} className="space-y-5 bg-card border rounded-xl p-6 lg:p-8">
                 <h2 className="text-xl font-serif font-bold mb-2">Request Appointment</h2>
                 <div>
@@ -94,7 +93,7 @@ const Contact = () => {
                 </Button>
                 <p className="text-xs text-muted-foreground text-center">We confirm appointments within 24 hours via phone call.</p>
               </form>
-            </motion.div>
+            </div>
 
             {/* Info */}
             <div className="space-y-6">
