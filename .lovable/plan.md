@@ -1,51 +1,67 @@
 
-<plan>
-<plan_summary>Build a complete, SEO-optimized medical website for Dr. D.K. Patwa — a dermatology clinic in Prayagraj. Multi-page React site with olive green/cream design, Framer Motion animations, full schema markup, and mobile-first responsive layout. All content hardcoded initially.</plan_summary>
 
-<plan_steps>
-<plan_step>
-<step_title>Project Setup & Design System</step_title>
-<step_description>Configure Tailwind with olive green (#6B7B3A, #8A9A5B), warm cream (#F5F0E8, #FAF7F2), and white color palette. Add serif font (Playfair Display) for headings and sans-serif (Inter) for body. Install framer-motion and react-helmet-async for animations and SEO.</step_description>
-</plan_step>
+## Plan: Services Redesign, Color Scheme Update, Gallery Images & Map Fix
 
-<plan_step>
-<step_title>SEO Infrastructure</step_title>
-<step_description>Create a reusable SEO component using react-helmet-async that handles page titles, meta descriptions, canonical tags, Open Graph, Twitter Cards, and JSON-LD schema (LocalBusiness/Dermatologist, BreadcrumbList, FAQPage). Add static sitemap.xml and update robots.txt. Each page gets unique meta tags as specified.</step_description>
-</plan_step>
+### 1. Services Page — Accordion-style layout
 
-<plan_step>
-<step_title>Homepage</step_title>
-<step_description>Hero section with H1 "Best Dermatologist in Prayagraj – Dr. D.K. Patwa", doctor photo, CTAs for "Book Appointment" and "View Services". Trust bar with stats (13+ Years, 500+ Patients, etc.). Services overview grid (6 icon cards). About teaser. Patient testimonials carousel. FAQ accordion section (5 questions for featured snippets). Map + contact strip at bottom.</step_description>
-</plan_step>
+**Current problem**: Services are listed as long scrolling sections with a sticky horizontal nav bar. User wants a simpler, more user-friendly layout.
 
-<plan_step>
-<step_title>About Page</step_title>
-<step_description>Full biography with doctor photos (uploaded images), qualifications timeline (MBBS AMU 2012, MD IMS-BHU 2018), career history, memberships (CDSI), and personal quote. SEO-optimized with relevant H2 headings and keyword-rich content.</step_description>
-</plan_step>
+**New design**: 
+- Remove the sticky scrolling nav bar entirely
+- Show all 12 services as a clean list of clickable rows (like an accordion/expandable list)
+- Each row shows: icon + service title + a "+" icon on the right
+- Clicking expands to show the description and FAQ below that row
+- Only one service open at a time (accordion behavior)
+- Clean, compact, mobile-friendly — users can scan all services at a glance
 
-<plan_step>
-<step_title>Services Page</step_title>
-<step_description>12 service sections with anchor links: Acne Treatment, Skin Allergy, Anti-Aging, Chemical Peel, Dermabrasion, Skin Tag Removal, Hair Transplant, Hair Loss, Vitiligo, Eczema/Psoriasis, Fungal Infections, Wart Removal. Each with title, 150-word description, icon, and FAQ. Sticky sidebar navigation on desktop.</step_description>
-</plan_step>
+### 2. Color Scheme — Switch to medical blue + white
 
-<plan_step>
-<step_title>Gallery Page</step_title>
-<step_description>Before/after image grid with placeholder images and proper alt text. Filter buttons for Acne, Hair, Skin, Anti-Aging categories. Lightbox view for enlarged images.</step_description>
-</plan_step>
+Research confirms: **blue is the #1 color for medical/hospital websites** — it conveys trust, professionalism, and calm. Green is #2 but olive green specifically feels more spa/wellness than clinical.
 
-<plan_step>
-<step_title>Blog Page</step_title>
-<step_description>Blog listing page with 3 SEO articles (500+ words each): "Best Acne Treatment in Prayagraj", "Hair Fall Causes and Solutions", "When to See a Skin Specialist". Each with proper meta tags, H1/H2 structure, internal links to services, author attribution, and publish date.</step_description>
-</plan_step>
+**New palette**:
+- **Primary**: Medical blue `#1A6FC4` (trust, professionalism)  
+- **Accent**: Teal `#0D9488` (secondary actions)
+- **Background**: Clean white `#FAFBFC` and light gray `#F1F5F9`
+- **Text**: Dark navy `#1E293B`
+- Keep warm cream for subtle card backgrounds: `#F8FAFC`
 
-<plan_step>
-<step_title>Contact & Booking Page</step_title>
-<step_description>Appointment form with Name, Phone, Service dropdown, Date picker, Message. Google Maps embed showing clinic location. Clinic timings display. "We confirm within 24 hours" note. Full NAP details.</step_description>
-</plan_step>
+This matches what Apollo 247, Practo, Mayo Clinic, Cleveland Clinic, and most top medical sites use.
 
-<plan_step>
-<step_title>Global Components & Mobile Features</step_title>
-<step_description>Responsive navbar with mobile hamburger menu. Footer with full NAP, service links, "Get Directions" button, and local areas served. Floating WhatsApp button (wa.me/919560294926). Sticky "Book Appointment" bar on mobile. Click-to-call phone number. Smooth scroll navigation. Custom 404 page with "Go Back Home".</step_description>
-</plan_step>
-</plan_steps>
-</plan>
+### 3. Gallery Page — Add uploaded patient photos
+
+Copy the 10 uploaded patient images into `src/assets/gallery/` and map them to gallery items with proper categories:
+- image-10.png → Alopecia treatment (Hair)
+- image-11.png → Acne before/after (Acne)
+- image-12.png → Skin tag removal (Skin)
+- image-13.png → Mole removal before/after (Skin)
+- image-14.png → Eyebrow cosmetic treatment (Anti-Aging)
+- image-15.png → Lip treatment before/after/healed (Anti-Aging)
+- image-16.png → Vitiligo/hair treatment (Hair)
+- image-17.png → Acne treatment result (Acne)
+
+Display as actual `<img>` tags with proper alt text and lazy loading.
+
+### 4. Google Maps — Fix embed URL
+
+Update the iframe embed across Contact page and any other map references to use the correct clinic CID:
+```
+https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d81.86506!3d25.456863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4354381b5b08f2e7%3A0x4351e3fa6e9aab12!2sDr.+Patwa+skin+hair+laser+and+aesthetic+clinic!5e0!3m2!1sen!2sin
+```
+
+Also update:
+- Clinic name to "Dr. Patwa Skin Hair Laser and Aesthetic Clinic"
+- Address: "117/93-D/4, LIC Rd, near Kundan Guest House, Tagore Town, Prayagraj, UP 211002"
+- Add second phone: +91 89885 55540
+- Add email: drdkpatwa.dermatologist@gmail.com
+- Rating: 4.7 (426 reviews) instead of 4.5
+
+### Files to modify:
+- `src/index.css` — Update CSS custom properties to blue palette
+- `tailwind.config.ts` — Update any custom color references
+- `src/pages/Services.tsx` — Rewrite to accordion-style expandable list
+- `src/pages/Gallery.tsx` — Add real patient images
+- `src/pages/Contact.tsx` — Fix map embed, update contact details
+- `src/pages/Index.tsx` — Update rating/review count, contact details, map embed
+- `src/components/Footer.tsx` — Update clinic name, add email, second phone
+- `index.html` — Update schema markup with correct details
+
