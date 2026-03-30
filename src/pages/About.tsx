@@ -67,56 +67,31 @@ const About = () => (
     {/* Timeline */}
     <section className="py-16 lg:py-20">
       <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-2xl lg:text-3xl font-serif font-bold text-center mb-14"
-        >
-          Education & Career
-        </motion.h2>
+        <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center mb-14">
+          Education &amp; Career
+        </h2>
         <div className="relative">
-          {/* Animated vertical line */}
-          <motion.div
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="absolute left-[19px] top-0 bottom-0 w-px bg-border origin-top"
-          />
-          <div className="space-y-10">
+          <div className="absolute left-[19px] top-0 bottom-0 w-px bg-border" />
+          <div className="space-y-8">
             {timeline.map((t, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
                 className="flex gap-5 relative group"
               >
                 <div className="flex flex-col items-center z-10">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.15 + 0.2, type: "spring", stiffness: 200 }}
-                    className="p-2.5 rounded-full bg-primary text-primary-foreground shadow-md ring-4 ring-background"
-                  >
+                  <div className="p-2.5 rounded-full bg-primary text-primary-foreground shadow-sm ring-4 ring-background">
                     <t.icon className="w-5 h-5" />
-                  </motion.div>
+                  </div>
                 </div>
-                <motion.div
-                  initial={{ opacity: 0, x: -15 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.15 + 0.3 }}
-                  className="pb-2 bg-card rounded-xl border border-border/50 p-4 shadow-sm flex-1 group-hover:shadow-md group-hover:border-primary/20 transition-all duration-300"
-                >
+                <div className="pb-2 bg-card rounded-xl border border-border/50 p-4 shadow-sm flex-1 hover:shadow-md hover:border-primary/20 transition-shadow duration-200">
                   <span className="inline-block text-xs font-bold text-primary bg-primary/10 px-2.5 py-0.5 rounded-full">{t.year}</span>
                   <h3 className="font-serif font-semibold text-lg mt-2">{t.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{t.desc}</p>
-                </motion.div>
+                </div>
               </motion.div>
             ))}
           </div>
