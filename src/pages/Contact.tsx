@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import SEOHead from '@/components/SEOHead';
+import { useLanguage } from '@/context/LanguageContext';
 
 const serviceOptions = [
   'Acne Treatment', 'Hair Transplant', 'Hair Loss / PRP', 'Skin Allergy',
@@ -18,6 +19,7 @@ const MAPS_DIRECTIONS = "https://www.google.com/maps/place/Dr.+Patwa+skin+hair+l
 
 const Contact = () => {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -52,9 +54,9 @@ const Contact = () => {
 
       <section className="bg-secondary py-16 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8 text-center">
-          <h1 className="text-3xl lg:text-4xl font-serif font-bold mb-3">Book an Appointment</h1>
+          <h1 className="text-3xl lg:text-4xl font-serif font-bold mb-3">{t('contact.title')}</h1>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Schedule your consultation with Dr. D.K. Patwa, the best dermatologist in Prayagraj. We confirm appointments within 24 hours.
+            {t('contact.subtitle')}
           </p>
         </div>
       </section>
@@ -65,55 +67,55 @@ const Contact = () => {
             {/* Form */}
             <div className="animate-fade-in">
               <form onSubmit={handleSubmit} className="space-y-5 bg-card border rounded-xl p-6 lg:p-8">
-                <h2 className="text-xl font-serif font-bold mb-2">Request Appointment</h2>
+                <h2 className="text-xl font-serif font-bold mb-2">{t('contact.form.title')}</h2>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Full Name *</label>
-                  <Input placeholder="Your name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} maxLength={100} required />
+                  <label className="text-sm font-medium mb-1 block">{t('contact.form.name')}</label>
+                  <Input placeholder={t('contact.form.namePlaceholder')} value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} maxLength={100} required />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Phone Number *</label>
-                  <Input placeholder="10-digit mobile number" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value.replace(/\D/g, '').slice(0, 10) }))} required />
+                  <label className="text-sm font-medium mb-1 block">{t('contact.form.phone')}</label>
+                  <Input placeholder={t('contact.form.phonePlaceholder')} value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value.replace(/\D/g, '').slice(0, 10) }))} required />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Email Address</label>
+                  <label className="text-sm font-medium mb-1 block">{t('contact.form.email')}</label>
                   <Input type="email" placeholder="your@email.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} maxLength={255} />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Service Required</label>
+                  <label className="text-sm font-medium mb-1 block">{t('contact.form.service')}</label>
                   <Select value={form.service} onValueChange={v => setForm(f => ({ ...f, service: v }))}>
-                    <SelectTrigger><SelectValue placeholder="Select a service" /></SelectTrigger>
+                    <SelectTrigger><SelectValue placeholder={t('contact.form.selectService')} /></SelectTrigger>
                     <SelectContent>
                       {serviceOptions.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Message (Optional)</label>
-                  <Textarea placeholder="Describe your concern briefly..." value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} maxLength={500} rows={3} />
+                  <label className="text-sm font-medium mb-1 block">{t('contact.form.message')}</label>
+                  <Textarea placeholder={t('contact.form.messagePlaceholder')} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} maxLength={500} rows={3} />
                 </div>
                 <Button type="submit" className="w-full" size="lg">
-                  <Send className="w-4 h-4 mr-2" /> Submit Appointment Request
+                  <Send className="w-4 h-4 mr-2" /> {t('contact.form.submit')}
                 </Button>
-                <p className="text-xs text-muted-foreground text-center">We confirm appointments within 24 hours via phone call.</p>
+                <p className="text-xs text-muted-foreground text-center">{t('contact.form.confirmNote')}</p>
               </form>
             </div>
 
             {/* Info */}
             <div className="space-y-6">
               <div className="bg-card border rounded-xl p-6">
-                <h3 className="font-serif font-bold text-lg mb-4">Contact Information</h3>
+                <h3 className="font-serif font-bold text-lg mb-4">{t('contact.info.title')}</h3>
                 <ul className="space-y-4">
                   <li className="flex gap-3">
                     <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-medium text-sm">Clinic Address</p>
+                      <p className="font-medium text-sm">{t('contact.info.address')}</p>
                       <p className="text-sm text-muted-foreground">117/93-D/4, LIC Rd, near Kundan Guest House, Tagore Town, Prayagraj, UP 211002</p>
                     </div>
                   </li>
                   <li className="flex gap-3">
                     <Phone className="w-5 h-5 text-primary shrink-0" />
                     <div>
-                      <p className="font-medium text-sm">Phone</p>
+                      <p className="font-medium text-sm">{t('contact.info.phone')}</p>
                       <a href="tel:+918988555540" className="text-sm text-primary hover:underline block">+91 89885 55540</a>
                       <a href="tel:+919560294926" className="text-sm text-primary hover:underline block">+91 95602 94926</a>
                     </div>
@@ -121,17 +123,17 @@ const Contact = () => {
                   <li className="flex gap-3">
                     <Mail className="w-5 h-5 text-primary shrink-0" />
                     <div>
-                      <p className="font-medium text-sm">Email</p>
+                      <p className="font-medium text-sm">{t('contact.info.email')}</p>
                       <a href="mailto:drdkpatwa.dermatologist@gmail.com" className="text-sm text-primary hover:underline">drdkpatwa.dermatologist@gmail.com</a>
                     </div>
                   </li>
                   <li className="flex gap-3">
                     <Clock className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-medium text-sm">Clinic Timings</p>
-                      <p className="text-sm text-muted-foreground">Morning: 8:00 AM – 9:00 AM (Mon–Sat)</p>
-                      <p className="text-sm text-muted-foreground">Evening: 3:30 PM – 9:00 PM (Mon–Sat)</p>
-                      <p className="text-sm text-muted-foreground">Sunday: Closed</p>
+                      <p className="font-medium text-sm">{t('contact.info.timings')}</p>
+                      <p className="text-sm text-muted-foreground">{t('contact.info.morning')}</p>
+                      <p className="text-sm text-muted-foreground">{t('contact.info.evening')}</p>
+                      <p className="text-sm text-muted-foreground">{t('contact.info.sunday')}</p>
                     </div>
                   </li>
                 </ul>
@@ -158,7 +160,7 @@ const Contact = () => {
                 className="block"
               >
                 <Button variant="outline" className="w-full">
-                  <MapPin className="w-4 h-4 mr-2" /> Get Directions on Google Maps
+                  <MapPin className="w-4 h-4 mr-2" /> {t('contact.directions')}
                 </Button>
               </a>
             </div>
