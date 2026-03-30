@@ -17,6 +17,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
+import { useAnimationClass } from "./hooks/useAnimationClass";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,11 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => (
     <MobileBookingBar />
   </>
 );
+
+const AnimationClassManager = () => {
+  useAnimationClass();
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

@@ -121,6 +121,12 @@ html {
   }
 }
 
+/* Light animation mode — kill all animations */
+body.animation-light .animate-fade-in {
+  animation: none !important;
+  opacity: 1 !important;
+}
+
 /* Ensure animate-fade-in supports animationDelay via inline style */
 .animate-fade-in {
   animation-fill-mode: both;
