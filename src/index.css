@@ -121,10 +121,15 @@ html {
   }
 }
 
-/* Light animation mode — kill all animations */
-body.animation-light .animate-fade-in {
+/* Light animation mode — kill all animations for low-end devices */
+body.animation-light .animate-fade-in,
+body.animation-light .animate-scale-in,
+body.animation-light .animate-slide-in-right,
+body.animation-light .hover-scale {
   animation: none !important;
   opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
 }
 
 /* Ensure animate-fade-in supports animationDelay via inline style */
