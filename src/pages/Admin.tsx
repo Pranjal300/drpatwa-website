@@ -148,10 +148,12 @@ const Admin = () => {
     morning_timing: '🌅 Morning Timing',
     evening_timing: '🌆 Evening Timing',
     sunday_timing: '📅 Sunday',
-    google_rating: '⭐ Google Rating',
-    google_review_count: '📊 Review Count',
+    google_rating: '⭐ Google Rating (auto-synced)',
+    google_review_count: '📊 Review Count (auto-synced)',
     address: '📍 Address',
   };
+
+  const readOnlyKeys = ['google_rating', 'google_review_count'];
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   if (!isAdmin) return null;
@@ -193,6 +195,8 @@ const Admin = () => {
                     </div>
                   ) : s.key === 'address' ? (
                     <Textarea value={s.value} onChange={e => updateSetting(s.key, e.target.value)} rows={2} />
+                  ) : readOnlyKeys.includes(s.key) ? (
+                    <Input value={s.value} disabled className="opacity-70" />
                   ) : (
                     <Input value={s.value} onChange={e => updateSetting(s.key, e.target.value)} />
                   )}

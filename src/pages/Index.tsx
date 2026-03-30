@@ -5,10 +5,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/context/LanguageContext';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
 import doctorImg from '@/assets/doctor-1.png';
 
 const Index = () => {
   const { t, lang } = useLanguage();
+  const { data: settings } = useSiteSettings();
 
   const services = [
     { icon: Sparkles, title: t('service.acne'), desc: t('service.acne.desc') },
@@ -100,7 +102,7 @@ const Index = () => {
             {[
               { icon: Award, label: t('home.trust.years'), sub: t('home.trust.experience') },
               { icon: Stethoscope, label: t('home.trust.advanced'), sub: t('home.trust.technology') },
-              { icon: Users, label: t('home.trust.reviews'), sub: t('home.trust.googleReviews') },
+              { icon: Users, label: settings?.google_review_count || t('home.trust.reviews'), sub: t('home.trust.googleReviews') },
               { icon: Clock, label: t('home.trust.languages'), sub: t('home.trust.languagesLabel') },
             ].map((item, i) => (
               <div key={i} className="flex flex-col items-center gap-1">
