@@ -1,0 +1,23 @@
+reviews:
+  review_status: true
+  high_level_summary: true
+  poem: false
+  auto_review:
+    enabled: true
+    base_branches:
+      - main
+      - master
+
+chat:
+  auto_reply: true
+
+instructions: |
+  Prioritize security findings first.
+  Focus on:
+  - authentication and authorization bypass
+  - exposed secrets and insecure logging
+  - SQL/NoSQL/command injection vectors
+  - XSS, CSRF, and SSRF issues
+  - path traversal and unsafe file handling
+  - insecure crypto and token handling
+  - vulnerable dependencies
