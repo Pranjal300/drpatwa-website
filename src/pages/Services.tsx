@@ -1,6 +1,7 @@
 import { Sparkles, Scissors, Droplets, Sun, Shield, Stethoscope, Zap, Bug, Flame, Pill, Syringe, Eraser } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import SEOHead from '@/components/SEOHead';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface Service {
   id: string;
@@ -123,7 +124,10 @@ const services: Service[] = [
   },
 ];
 
-const Services = () => (
+const Services = () => {
+  const { t } = useLanguage();
+
+  return (
   <>
     <SEOHead
       title="Skin & Hair Treatment Services | Dr. Patwa Clinic Prayagraj"
@@ -142,10 +146,10 @@ const Services = () => (
     <section className="bg-secondary py-16 lg:py-20">
       <div className="container mx-auto px-4 lg:px-8 text-center">
         <h1 className="text-3xl lg:text-4xl font-serif font-bold mb-3">
-          Our Skin & Hair Treatment Services
+          {t('services.title')}
         </h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Comprehensive dermatology services by Dr. D.K. Patwa — your trusted skin doctor in Prayagraj. Tap on any service to learn more.
+          {t('services.subtitle')}
         </p>
       </div>
     </section>
@@ -167,7 +171,7 @@ const Services = () => (
                 <p className="text-muted-foreground leading-relaxed mb-4 pl-[52px]">{s.desc}</p>
                 {s.faq.length > 0 && (
                   <div className="pl-[52px] space-y-3">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">Frequently Asked</p>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">{t('services.faq')}</p>
                     {s.faq.map((f, j) => (
                       <div key={j} className="bg-secondary/50 rounded-lg p-4">
                         <p className="text-sm font-semibold mb-1">{f.q}</p>
@@ -183,6 +187,7 @@ const Services = () => (
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default Services;
