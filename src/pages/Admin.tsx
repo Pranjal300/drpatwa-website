@@ -195,6 +195,8 @@ const Admin = () => {
                     </div>
                   ) : s.key === 'address' ? (
                     <Textarea value={s.value} onChange={e => updateSetting(s.key, e.target.value)} rows={2} />
+                  ) : readOnlyKeys.includes(s.key) ? (
+                    <Input value={s.value} disabled className="opacity-70" />
                   ) : (
                     <Input value={s.value} onChange={e => updateSetting(s.key, e.target.value)} />
                   )}
