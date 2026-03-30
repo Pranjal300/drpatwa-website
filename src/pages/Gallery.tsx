@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SEOHead from '@/components/SEOHead';
 
 import gallery1 from '@/assets/gallery/gallery-1.png';
-import gallery2 from '@/assets/gallery/gallery-2.png';
+
 import gallery3 from '@/assets/gallery/gallery-3.png';
 import gallery4 from '@/assets/gallery/gallery-4.png';
 import gallery5 from '@/assets/gallery/gallery-5.png';
@@ -25,7 +25,7 @@ const galleryItems = [
   { id: 7, src: gallery9, category: 'Hair', alt: 'Vitiligo hair treatment result Prayagraj clinic' },
   { id: 8, src: gallery10, category: 'Acne', alt: 'Acne treatment result skin specialist Prayagraj' },
   { id: 9, src: gallery1, category: 'Skin', alt: 'Skin treatment result Dr Patwa clinic Prayagraj' },
-  { id: 10, src: gallery2, category: 'Hair', alt: 'Hair treatment result Prayagraj dermatologist' },
+  
 ];
 
 const Gallery = () => {
