@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,20 +14,25 @@ const AdminLogin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  if (!loading && isAdmin) {
-    navigate('/admin', { replace: true });
-    return null;
-  }
+  // Redirect if already admin — inside useEffect to avoid render-time navigation
+  useEffect(() => {
+    if (!loading && isAdmin) {
+      navigate('/admin', { replace: true });
+    }
+  }, [loading, isAdmin, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    const { error } = await signIn(email, password);
-    if (error) {
-      toast({ title: 'Login failed', description: error.message, variant: 'destructive' });
-    } else {
-      // useAdmin will re-check role, then redirect
-      setTimeout(() => navigate('/admin', { replace: true }), 500);
+    try {
+      const { error } = await signIn(email, password);
+      if (error) {
+        toast({ title: 'Login failed', description: error.message, variant: 'destructive' });
+      } else {
+        setTimeout(() => navigate('/admin', { replace: true }), 600);
+      }
+    } catch (err) {
+      toast({ title: 'Login failed', description: 'Network error, please try again.', variant: 'destructive' });
     }
     setSubmitting(false);
   };
@@ -48,7 +53,7 @@ const AdminLogin = () => {
           <label className="text-sm font-medium mb-1 block">Password</label>
           <Input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
         </div>
-        <Button type="submit" className="w-full" disabled={submitting || loading}>
+        <Button type="submit" className="w-full" disabled={submitting}>
           {submitting ? 'Signing in...' : 'Sign In'}
         </Button>
       </form>
