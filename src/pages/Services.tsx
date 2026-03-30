@@ -124,7 +124,10 @@ const services: Service[] = [
   },
 ];
 
-const Services = () => (
+const Services = () => {
+  const { t } = useLanguage();
+
+  return (
   <>
     <SEOHead
       title="Skin & Hair Treatment Services | Dr. Patwa Clinic Prayagraj"
@@ -143,10 +146,10 @@ const Services = () => (
     <section className="bg-secondary py-16 lg:py-20">
       <div className="container mx-auto px-4 lg:px-8 text-center">
         <h1 className="text-3xl lg:text-4xl font-serif font-bold mb-3">
-          Our Skin & Hair Treatment Services
+          {t('services.title')}
         </h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Comprehensive dermatology services by Dr. D.K. Patwa — your trusted skin doctor in Prayagraj. Tap on any service to learn more.
+          {t('services.subtitle')}
         </p>
       </div>
     </section>
