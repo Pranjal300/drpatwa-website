@@ -1,6 +1,7 @@
 import { Sparkles, Scissors, Droplets, Sun, Shield, Stethoscope, Zap, Bug, Flame, Pill, Syringe, Eraser } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import SEOHead from '@/components/SEOHead';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface Service {
   id: string;
