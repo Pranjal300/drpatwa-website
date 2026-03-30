@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SEOHead from '@/components/SEOHead';
 
 import gallery1 from '@/assets/gallery/gallery-1.png';
-import gallery2 from '@/assets/gallery/gallery-2.png';
+
 import gallery3 from '@/assets/gallery/gallery-3.png';
 import gallery4 from '@/assets/gallery/gallery-4.png';
 import gallery5 from '@/assets/gallery/gallery-5.png';
