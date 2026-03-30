@@ -42,6 +42,7 @@ const App = () => (
       <LanguageProvider>
         <Toaster />
         <Sonner />
+        <AnimationClassManager />
         <BrowserRouter>
           <Routes>
             <Route path="/admin/login" element={<AdminLogin />} />
