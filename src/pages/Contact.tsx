@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/context/LanguageContext';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const serviceOptions = [
   'Acne Treatment', 'Hair Transplant', 'Hair Loss / PRP', 'Skin Allergy',
@@ -21,6 +22,8 @@ const Contact = () => {
   const { toast } = useToast();
   const { t } = useLanguage();
   const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' });
+  const formRef = useScrollReveal();
+  const infoRef = useScrollReveal();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,7 +68,7 @@ const Contact = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10">
             {/* Form */}
-            <div className="animate-fade-in">
+            <div ref={formRef}>
               <form onSubmit={handleSubmit} className="space-y-5 bg-card border rounded-xl p-6 lg:p-8">
                 <h2 className="text-xl font-serif font-bold mb-2">{t('contact.form.title')}</h2>
                 <div>
@@ -101,7 +104,7 @@ const Contact = () => {
             </div>
 
             {/* Info */}
-            <div className="space-y-6">
+            <div ref={infoRef} className="space-y-6">
               <div className="bg-card border rounded-xl p-6">
                 <h3 className="font-serif font-bold text-lg mb-4">{t('contact.info.title')}</h3>
                 <ul className="space-y-4">

@@ -6,11 +6,19 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import SEOHead from '@/components/SEOHead';
 import { useLanguage } from '@/context/LanguageContext';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
+import { useScrollReveal, useScrollRevealList } from '@/hooks/useScrollReveal';
 import doctorImg from '@/assets/doctor-1.png';
 
 const Index = () => {
   const { t, lang } = useLanguage();
   const { data: settings } = useSiteSettings();
+  const heroTextRef = useScrollReveal();
+  const heroImgRef = useScrollReveal();
+  const servicesTitleRef = useScrollReveal();
+  const aboutRef = useScrollReveal();
+  const testimonialsRef = useScrollReveal();
+  const faqRef = useScrollReveal();
+  const mapRef = useScrollReveal();
 
   const services = [
     { icon: Sparkles, title: t('service.acne'), desc: t('service.acne.desc') },
@@ -21,12 +29,16 @@ const Index = () => {
     { icon: Stethoscope, title: t('service.vitiligo'), desc: t('service.vitiligo.desc') },
   ];
 
+  const setServiceRef = useScrollRevealList(services.length);
+
   const testimonials = [
     { name: 'Rahul S.', text: lang === 'hi' ? 'डॉ. पटवा ने मेरे पुराने मुंहासों को पूरी तरह ठीक किया। प्रयागराज के सबसे अच्छे त्वचा डॉक्टर!' : 'Dr. Patwa completely cured my chronic acne. His approach is thorough and caring. Best dermatologist in Prayagraj!', rating: 5 },
     { name: 'Priya M.', text: lang === 'hi' ? 'बालों के झड़ने के इलाज के शानदार परिणाम। बहुत पेशेवर क्लिनिक। अत्यधिक अनुशंसित!' : 'Amazing results for my hair loss treatment. Very professional clinic with modern equipment. Highly recommended!', rating: 5 },
     { name: 'Amit K.', text: lang === 'hi' ? 'यहां हेयर ट्रांसप्लांट कराया। परिणाम अद्भुत और प्राकृतिक हैं। डॉ. पटवा वास्तव में कुशल हैं।' : 'Got my hair transplant done here. The results are incredible and very natural-looking. Dr. Patwa is truly skilled.', rating: 5 },
     { name: 'Sunita D.', text: lang === 'hi' ? 'मेरी त्वचा एलर्जी कुछ ही हफ्तों में ठीक हो गई। स्टाफ मिलनसार है और क्लिनिक बहुत साफ है।' : 'My skin allergy was treated within weeks. The staff is friendly and the clinic is very clean. Thank you Dr. Patwa!', rating: 4 },
   ];
+
+  const setTestimonialRef = useScrollRevealList(testimonials.length);
 
   const faqs = [
     { q: lang === 'hi' ? 'प्रयागराज में सबसे अच्छे त्वचा डॉक्टर कौन हैं?' : 'Who is the best dermatologist in Prayagraj?', a: lang === 'hi' ? 'डॉ. डी.के. पटवा प्रयागराज के सबसे प्रतिष्ठित त्वचा रोग विशेषज्ञों में से एक हैं। IMS-BHU से MD, 13+ वर्षों का अनुभव, और Google पर 426+ रोगियों से 4.7-स्टार रेटिंग।' : 'Dr. D.K. Patwa is widely regarded as one of the best dermatologists in Prayagraj. With an MD in Dermatology from IMS-BHU, over 13 years of experience, and a 4.7-star rating from 426+ patients on Google, he provides expert care for all skin, hair, and cosmetic concerns at his clinic in Tagore Town.' },
@@ -59,7 +71,7 @@ const Index = () => {
       <section className="relative overflow-hidden bg-secondary">
         <div className="container mx-auto px-4 lg:px-8 py-16 lg:py-24">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div className="animate-fade-in">
+            <div ref={heroTextRef}>
               <p className="text-accent font-medium text-sm uppercase tracking-wider mb-3">
                 {t('home.hero.subtitle')}
               </p>
@@ -82,7 +94,7 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="flex justify-center animate-fade-in" style={{ animationDelay: '0.15s' }}>
+            <div ref={heroImgRef} className="flex justify-center">
               <img
                 src={doctorImg}
                 alt="Dr DK Patwa dermatologist Prayagraj"
@@ -118,7 +130,7 @@ const Index = () => {
       {/* Services Overview */}
       <section className="py-16 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
+          <div ref={servicesTitleRef} className="text-center mb-12">
             <h2 className="text-2xl lg:text-3xl font-serif font-bold text-foreground mb-3">
               {t('home.services.title')}
             </h2>
@@ -129,7 +141,7 @@ const Index = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s, i) => (
-              <div key={i} className="animate-fade-in" style={{ animationDelay: `${i * 0.06}s` }}>
+              <div key={i} ref={setServiceRef(i)}>
                 <Card className="h-full hover:shadow-md transition-shadow group">
                   <CardContent className="p-6 flex flex-col items-start gap-3">
                     <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
@@ -151,7 +163,7 @@ const Index = () => {
       {/* About Teaser */}
       <section className="bg-secondary py-16 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
+          <div ref={aboutRef} className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <h2 className="text-2xl lg:text-3xl font-serif font-bold mb-4">
                 {t('home.about.title')}
@@ -181,22 +193,26 @@ const Index = () => {
       {/* Testimonials */}
       <section className="py-16 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8">
-          <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center mb-10">
-            {t('home.testimonials.title')}
-          </h2>
+          <div ref={testimonialsRef}>
+            <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center mb-10">
+              {t('home.testimonials.title')}
+            </h2>
+          </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {testimonials.map((item, i) => (
-              <Card key={i} className="h-full">
-                <CardContent className="p-6">
-                  <div className="flex gap-0.5 mb-3">
-                    {Array.from({ length: item.rating }).map((_, j) => (
-                      <Star key={j} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">"{item.text}"</p>
-                  <p className="text-sm font-semibold">{item.name}</p>
-                </CardContent>
-              </Card>
+              <div key={i} ref={setTestimonialRef(i)}>
+                <Card className="h-full">
+                  <CardContent className="p-6">
+                    <div className="flex gap-0.5 mb-3">
+                      {Array.from({ length: item.rating }).map((_, j) => (
+                        <Star key={j} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">"{item.text}"</p>
+                    <p className="text-sm font-semibold">{item.name}</p>
+                  </CardContent>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
@@ -205,9 +221,11 @@ const Index = () => {
       {/* FAQ */}
       <section className="bg-secondary py-16 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
-          <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center mb-10">
-            {t('home.faq.title')}
-          </h2>
+          <div ref={faqRef}>
+            <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center mb-10">
+              {t('home.faq.title')}
+            </h2>
+          </div>
           <Accordion type="single" collapsible className="space-y-2">
             {faqs.map((f, i) => (
               <AccordionItem key={i} value={`faq-${i}`} className="bg-card rounded-lg border px-4">
@@ -226,12 +244,14 @@ const Index = () => {
       {/* Map & Contact Strip */}
       <section className="py-16 lg:py-20">
         <div className="container mx-auto px-4 lg:px-8">
-          <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center mb-3">
-            {t('home.map.title')}
-          </h2>
-          <p className="text-center text-muted-foreground mb-8 max-w-xl mx-auto">
-            {t('home.map.subtitle')}
-          </p>
+          <div ref={mapRef}>
+            <h2 className="text-2xl lg:text-3xl font-serif font-bold text-center mb-3">
+              {t('home.map.title')}
+            </h2>
+            <p className="text-center text-muted-foreground mb-8 max-w-xl mx-auto">
+              {t('home.map.subtitle')}
+            </p>
+          </div>
           <div className="rounded-xl overflow-hidden border shadow-sm">
             <iframe
               title="Dr Patwa Skin Hair Laser and Aesthetic Clinic Prayagraj"
