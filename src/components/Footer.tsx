@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Clock, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Clock, ExternalLink, Mail } from 'lucide-react';
 
 const Footer = () => (
   <footer className="bg-primary text-primary-foreground">
@@ -7,9 +7,9 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* About */}
         <div>
-          <h3 className="text-lg font-serif font-bold mb-4">Dr. Patwa Skin Care & Hair Clinic</h3>
+          <h3 className="text-lg font-serif font-bold mb-4">Dr. Patwa Skin Hair Laser & Aesthetic Clinic</h3>
           <p className="text-sm opacity-90 leading-relaxed">
-            Trusted dermatology clinic in Prayagraj offering advanced skin and hair treatments with 13+ years of medical expertise.
+            Trusted dermatology clinic in Prayagraj offering advanced skin, hair, laser, and aesthetic treatments with 13+ years of medical expertise.
           </p>
         </div>
 
@@ -37,11 +37,18 @@ const Footer = () => (
           <ul className="space-y-3 text-sm opacity-90">
             <li className="flex gap-2">
               <MapPin className="w-4 h-4 shrink-0 mt-0.5" />
-              <span>117/93-D/4, LIC Road, Near Kali Mandir, Tagore Town, Prayagraj, UP 211002</span>
+              <span>117/93-D/4, LIC Rd, near Kundan Guest House, Tagore Town, Prayagraj, UP 211002</span>
             </li>
             <li className="flex gap-2 items-center">
               <Phone className="w-4 h-4 shrink-0" />
-              <a href="tel:+919560294926" className="hover:underline">+91 95602 94926</a>
+              <div>
+                <a href="tel:+918988555540" className="hover:underline block">+91 89885 55540</a>
+                <a href="tel:+919560294926" className="hover:underline block">+91 95602 94926</a>
+              </div>
+            </li>
+            <li className="flex gap-2 items-center">
+              <Mail className="w-4 h-4 shrink-0" />
+              <a href="mailto:drdkpatwa.dermatologist@gmail.com" className="hover:underline text-xs">drdkpatwa.dermatologist@gmail.com</a>
             </li>
             <li className="flex gap-2">
               <Clock className="w-4 h-4 shrink-0 mt-0.5" />
@@ -53,7 +60,7 @@ const Footer = () => (
             </li>
           </ul>
           <a
-            href="https://maps.google.com/?q=Dr+Patwa+Skin+Care+Hair+Clinic+Prayagraj"
+            href="https://www.google.com/maps?ll=25.456863,81.86506&z=17&t=m&hl=en-US&gl=US&mapclient=embed&cid=4851935573763704594"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 mt-3 text-sm font-medium underline hover:opacity-80"
@@ -68,11 +75,15 @@ const Footer = () => (
           <p className="text-sm opacity-90 leading-relaxed">
             Serving patients in Prayagraj, Allahabad, Tagore Town, Naini, Jhunsi, Civil Lines, Mumfordganj, Georgetown, and surrounding areas.
           </p>
+          <div className="mt-4">
+            <p className="text-sm font-medium">⭐ 4.7 Rated</p>
+            <p className="text-xs opacity-80">Based on 426+ Google Reviews</p>
+          </div>
         </div>
       </div>
 
       <div className="border-t border-primary-foreground/20 mt-10 pt-6 text-center text-xs opacity-70">
-        © {new Date().getFullYear()} Dr. Patwa Skin Care & Hair Clinic, Prayagraj. All rights reserved.
+        © {new Date().getFullYear()} Dr. Patwa Skin Hair Laser and Aesthetic Clinic, Prayagraj. All rights reserved.
       </div>
     </div>
   </footer>

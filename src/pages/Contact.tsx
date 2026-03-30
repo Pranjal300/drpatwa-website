@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, MapPin, Clock, Send } from 'lucide-react';
+import { Phone, MapPin, Clock, Send, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,7 +11,7 @@ import SEOHead from '@/components/SEOHead';
 const serviceOptions = [
   'Acne Treatment', 'Hair Transplant', 'Hair Loss / PRP', 'Skin Allergy',
   'Anti-Aging', 'Chemical Peel', 'Vitiligo', 'Eczema / Psoriasis',
-  'Fungal Infection', 'Wart Removal', 'Skin Tag Removal', 'General Consultation'
+  'Fungal Infection', 'Wart Removal', 'Skin Tag Removal', 'Laser Treatment', 'General Consultation'
 ];
 
 const Contact = () => {
@@ -35,8 +35,8 @@ const Contact = () => {
   return (
     <>
       <SEOHead
-        title="Book Appointment – Dr. Patwa Skin Care & Hair Clinic | Prayagraj"
-        description="Book your appointment with Dr. D.K. Patwa, dermatologist in Prayagraj. Call +91 95602 94926 or fill the online form. Clinic: Tagore Town, Prayagraj."
+        title="Book Appointment – Dr. Patwa Skin Hair Laser Clinic | Prayagraj"
+        description="Book your appointment with Dr. D.K. Patwa, dermatologist in Prayagraj. Call +91 89885 55540 or fill the online form. Clinic: Tagore Town, Prayagraj."
         canonical="https://drpatwa.com/contact"
         schema={{
           "@context": "https://schema.org",
@@ -66,22 +66,11 @@ const Contact = () => {
                 <h2 className="text-xl font-serif font-bold mb-2">Request Appointment</h2>
                 <div>
                   <label className="text-sm font-medium mb-1 block">Full Name *</label>
-                  <Input
-                    placeholder="Your name"
-                    value={form.name}
-                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                    maxLength={100}
-                    required
-                  />
+                  <Input placeholder="Your name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} maxLength={100} required />
                 </div>
                 <div>
                   <label className="text-sm font-medium mb-1 block">Phone Number *</label>
-                  <Input
-                    placeholder="10-digit mobile number"
-                    value={form.phone}
-                    onChange={e => setForm(f => ({ ...f, phone: e.target.value.replace(/\D/g, '').slice(0, 10) }))}
-                    required
-                  />
+                  <Input placeholder="10-digit mobile number" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value.replace(/\D/g, '').slice(0, 10) }))} required />
                 </div>
                 <div>
                   <label className="text-sm font-medium mb-1 block">Service Required</label>
@@ -94,22 +83,11 @@ const Contact = () => {
                 </div>
                 <div>
                   <label className="text-sm font-medium mb-1 block">Preferred Date</label>
-                  <Input
-                    type="date"
-                    value={form.date}
-                    onChange={e => setForm(f => ({ ...f, date: e.target.value }))}
-                    min={new Date().toISOString().split('T')[0]}
-                  />
+                  <Input type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))} min={new Date().toISOString().split('T')[0]} />
                 </div>
                 <div>
                   <label className="text-sm font-medium mb-1 block">Message (Optional)</label>
-                  <Textarea
-                    placeholder="Describe your concern briefly..."
-                    value={form.message}
-                    onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                    maxLength={500}
-                    rows={3}
-                  />
+                  <Textarea placeholder="Describe your concern briefly..." value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} maxLength={500} rows={3} />
                 </div>
                 <Button type="submit" className="w-full" size="lg">
                   <Send className="w-4 h-4 mr-2" /> Submit Appointment Request
@@ -127,14 +105,22 @@ const Contact = () => {
                     <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                     <div>
                       <p className="font-medium text-sm">Clinic Address</p>
-                      <p className="text-sm text-muted-foreground">117/93-D/4, LIC Road, Near Kali Mandir, Tagore Town, Prayagraj, UP 211002</p>
+                      <p className="text-sm text-muted-foreground">117/93-D/4, LIC Rd, near Kundan Guest House, Tagore Town, Prayagraj, UP 211002</p>
                     </div>
                   </li>
                   <li className="flex gap-3">
                     <Phone className="w-5 h-5 text-primary shrink-0" />
                     <div>
                       <p className="font-medium text-sm">Phone</p>
-                      <a href="tel:+919560294926" className="text-sm text-primary hover:underline">+91 95602 94926</a>
+                      <a href="tel:+918988555540" className="text-sm text-primary hover:underline block">+91 89885 55540</a>
+                      <a href="tel:+919560294926" className="text-sm text-primary hover:underline block">+91 95602 94926</a>
+                    </div>
+                  </li>
+                  <li className="flex gap-3">
+                    <Mail className="w-5 h-5 text-primary shrink-0" />
+                    <div>
+                      <p className="font-medium text-sm">Email</p>
+                      <a href="mailto:drdkpatwa.dermatologist@gmail.com" className="text-sm text-primary hover:underline">drdkpatwa.dermatologist@gmail.com</a>
                     </div>
                   </li>
                   <li className="flex gap-3">
@@ -152,8 +138,8 @@ const Contact = () => {
               {/* Map */}
               <div className="rounded-xl overflow-hidden border">
                 <iframe
-                  title="Dr Patwa Skin Care Clinic Map Prayagraj"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d81.8463!3d25.4358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sTagore+Town+Prayagraj!5e0!3m2!1sen!2sin!4v1700000000000"
+                  title="Dr Patwa Skin Hair Laser and Aesthetic Clinic Map"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d81.86506!3d25.456863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3985359fd2c6b88d%3A0x4351e3fa6e9aab12!2sDr.+Patwa+skin+hair+laser+and+aesthetic+clinic!5e0!3m2!1sen!2sin"
                   width="100%"
                   height="250"
                   style={{ border: 0 }}
@@ -164,7 +150,7 @@ const Contact = () => {
               </div>
 
               <a
-                href="https://maps.google.com/?q=Dr+Patwa+Skin+Care+Hair+Clinic+Prayagraj"
+                href="https://www.google.com/maps?ll=25.456863,81.86506&z=17&t=m&hl=en-US&gl=US&mapclient=embed&cid=4851935573763704594"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block"

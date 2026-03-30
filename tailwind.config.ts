@@ -51,17 +51,17 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        olive: {
-          DEFAULT: "hsl(var(--olive))",
-          light: "hsl(var(--olive-light))",
-          muted: "hsl(var(--olive-muted))",
+        "medical-blue": {
+          DEFAULT: "hsl(var(--medical-blue))",
+          light: "hsl(var(--medical-blue-light))",
+          dark: "hsl(var(--medical-blue-dark))",
         },
-        cream: {
-          DEFAULT: "hsl(var(--cream))",
-          light: "hsl(var(--cream-light))",
-          dark: "hsl(var(--cream-dark))",
+        teal: {
+          DEFAULT: "hsl(var(--teal))",
+          light: "hsl(var(--teal-light))",
         },
-        "warm-white": "hsl(var(--warm-white))",
+        "light-gray": "hsl(var(--light-gray))",
+        "clean-white": "hsl(var(--clean-white))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
