@@ -225,7 +225,7 @@ const Index = () => (
         <div className="rounded-xl overflow-hidden border shadow-sm">
           <iframe
             title="Dr Patwa Skin Hair Laser and Aesthetic Clinic Prayagraj"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d81.86506!3d25.456863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3985359fd2c6b88d%3A0x4351e3fa6e9aab12!2sDr.+Patwa+skin+hair+laser+and+aesthetic+clinic!5e0!3m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3602.4434796866726!2d81.86506!3d25.456863!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399acbf1512e89df%3A0x435589b29b444712!2sDr.%20Patwa%20skin%20hair%20laser%20and%20aesthetic%20clinic!5e0!3m2!1sen!2sin!4v1774899477479!5m2!1sen!2sin"
             width="100%"
             height="350"
             style={{ border: 0 }}

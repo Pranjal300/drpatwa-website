@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Clock, ExternalLink, Mail } from 'lucide-react';
+import { MapPin, Phone, Clock, ExternalLink, Mail, Facebook } from 'lucide-react';
+
+const MAPS_DIRECTIONS = "https://www.google.com/maps/place/Dr.+Patwa+skin+hair+laser+and+aesthetic+clinic/@25.456863,81.86506,17z/data=!4m6!3m5!1s0x399acbf1512e89df:0x435589b29b444712!8m2!3d25.4565894!4d81.8661429!16s%2Fg%2F11gr3bvb2d";
 
 const Footer = () => (
   <footer className="bg-primary text-primary-foreground">
@@ -8,9 +10,17 @@ const Footer = () => (
         {/* About */}
         <div>
           <h3 className="text-lg font-serif font-bold mb-4">Dr. Patwa Skin Hair Laser & Aesthetic Clinic</h3>
-          <p className="text-sm opacity-90 leading-relaxed">
+          <p className="text-sm opacity-90 leading-relaxed mb-4">
             Trusted dermatology clinic in Prayagraj offering advanced skin, hair, laser, and aesthetic treatments with 13+ years of medical expertise.
           </p>
+          <a
+            href="https://www.facebook.com/groups/652098457544106"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium bg-primary-foreground/10 hover:bg-primary-foreground/20 px-4 py-2 rounded-lg transition-colors"
+          >
+            <Facebook className="w-4 h-4" /> Join Our Facebook Group
+          </a>
         </div>
 
         {/* Quick Links */}
@@ -60,7 +70,7 @@ const Footer = () => (
             </li>
           </ul>
           <a
-            href="https://www.google.com/maps?ll=25.456863,81.86506&z=17&t=m&hl=en-US&gl=US&mapclient=embed&cid=4851935573763704594"
+            href={MAPS_DIRECTIONS}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 mt-3 text-sm font-medium underline hover:opacity-80"

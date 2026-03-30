@@ -13,9 +13,12 @@ const serviceOptions = [
   'Fungal Infection', 'Wart Removal', 'Skin Tag Removal', 'Laser Treatment', 'General Consultation'
 ];
 
+const MAPS_EMBED = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3602.4434796866726!2d81.86506!3d25.456863!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399acbf1512e89df%3A0x435589b29b444712!2sDr.%20Patwa%20skin%20hair%20laser%20and%20aesthetic%20clinic!5e0!3m2!1sen!2sin!4v1774899477479!5m2!1sen!2sin";
+const MAPS_DIRECTIONS = "https://www.google.com/maps/place/Dr.+Patwa+skin+hair+laser+and+aesthetic+clinic/@25.456863,81.86506,17z/data=!4m6!3m5!1s0x399acbf1512e89df:0x435589b29b444712!8m2!3d25.4565894!4d81.8661429!16s%2Fg%2F11gr3bvb2d";
+
 const Contact = () => {
   const { toast } = useToast();
-  const [form, setForm] = useState({ name: '', phone: '', service: '', date: '', message: '' });
+  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +31,7 @@ const Contact = () => {
       return;
     }
     toast({ title: 'Appointment Request Sent!', description: 'We will confirm your appointment within 24 hours.' });
-    setForm({ name: '', phone: '', service: '', date: '', message: '' });
+    setForm({ name: '', phone: '', email: '', service: '', message: '' });
   };
 
   return (
@@ -72,6 +75,10 @@ const Contact = () => {
                   <Input placeholder="10-digit mobile number" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value.replace(/\D/g, '').slice(0, 10) }))} required />
                 </div>
                 <div>
+                  <label className="text-sm font-medium mb-1 block">Email Address</label>
+                  <Input type="email" placeholder="your@email.com" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} maxLength={255} />
+                </div>
+                <div>
                   <label className="text-sm font-medium mb-1 block">Service Required</label>
                   <Select value={form.service} onValueChange={v => setForm(f => ({ ...f, service: v }))}>
                     <SelectTrigger><SelectValue placeholder="Select a service" /></SelectTrigger>
@@ -79,10 +86,6 @@ const Contact = () => {
                       {serviceOptions.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
                     </SelectContent>
                   </Select>
-                </div>
-                <div>
-                  <label className="text-sm font-medium mb-1 block">Preferred Date</label>
-                  <Input type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))} min={new Date().toISOString().split('T')[0]} />
                 </div>
                 <div>
                   <label className="text-sm font-medium mb-1 block">Message (Optional)</label>
@@ -138,7 +141,7 @@ const Contact = () => {
               <div className="rounded-xl overflow-hidden border">
                 <iframe
                   title="Dr Patwa Skin Hair Laser and Aesthetic Clinic Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d81.86506!3d25.456863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3985359fd2c6b88d%3A0x4351e3fa6e9aab12!2sDr.+Patwa+skin+hair+laser+and+aesthetic+clinic!5e0!3m2!1sen!2sin"
+                  src={MAPS_EMBED}
                   width="100%"
                   height="250"
                   style={{ border: 0 }}
@@ -149,7 +152,7 @@ const Contact = () => {
               </div>
 
               <a
-                href="https://www.google.com/maps?ll=25.456863,81.86506&z=17&t=m&hl=en-US&gl=US&mapclient=embed&cid=4851935573763704594"
+                href={MAPS_DIRECTIONS}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block"
