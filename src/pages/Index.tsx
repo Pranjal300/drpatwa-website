@@ -1,20 +1,10 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Star, Clock, Award, Users, Stethoscope, Scissors, Sparkles, Shield, Droplets, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import SEOHead from '@/components/SEOHead';
 import doctorImg from '@/assets/doctor-1.png';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const stagger = {
-  visible: { transition: { staggerChildren: 0.1 } },
-};
 
 const services = [
   { icon: Sparkles, title: 'Acne & Pimple Treatment', desc: 'Advanced acne solutions for clear, healthy skin.' },
@@ -63,42 +53,38 @@ const Index = () => (
     <section className="relative overflow-hidden bg-secondary">
       <div className="container mx-auto px-4 lg:px-8 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <motion.div initial="hidden" animate="visible" variants={stagger}>
-            <motion.p variants={fadeUp} className="text-accent font-medium text-sm uppercase tracking-wider mb-3">
+          <div className="animate-fade-in">
+            <p className="text-accent font-medium text-sm uppercase tracking-wider mb-3">
               Dermatologist • Venereologist • Hair Transplant Surgeon
-            </motion.p>
-            <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-foreground leading-tight mb-4">
+            </p>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-foreground leading-tight mb-4">
               Best Dermatologist in Prayagraj – <span className="text-primary">Dr. D.K. Patwa</span>
-            </motion.h1>
-            <motion.p variants={fadeUp} className="text-muted-foreground text-base lg:text-lg mb-2">
+            </h1>
+            <p className="text-muted-foreground text-base lg:text-lg mb-2">
               Expert Skin, Hair, Laser & Aesthetic Care You Can Trust
-            </motion.p>
-            <motion.p variants={fadeUp} className="text-sm text-muted-foreground mb-6">
+            </p>
+            <p className="text-sm text-muted-foreground mb-6">
               MBBS (AMU) • MD Dermatology (IMS-BHU) • 13+ Years Experience • ⭐ 4.7 Rated (426+ Reviews)
-            </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
+            </p>
+            <div className="flex flex-wrap gap-3">
               <Button asChild size="lg">
                 <Link to="/contact">Book Appointment</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link to="/services">View Services</Link>
               </Button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="flex justify-center"
-          >
+          <div className="flex justify-center animate-fade-in" style={{ animationDelay: '0.15s' }}>
             <img
               src={doctorImg}
               alt="Dr DK Patwa dermatologist Prayagraj"
               className="w-72 lg:w-96 rounded-2xl shadow-xl"
               loading="eager"
+              decoding="async"
             />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -126,18 +112,18 @@ const Index = () => (
     {/* Services Overview */}
     <section className="py-16 lg:py-20">
       <div className="container mx-auto px-4 lg:px-8">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-12">
-          <motion.h2 variants={fadeUp} className="text-2xl lg:text-3xl font-serif font-bold text-foreground mb-3">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl lg:text-3xl font-serif font-bold text-foreground mb-3">
             Skin Specialist in Tagore Town
-          </motion.h2>
-          <motion.p variants={fadeUp} className="text-muted-foreground max-w-2xl mx-auto">
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Comprehensive dermatology services for all your skin, hair, laser, and aesthetic needs in Prayagraj.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((s, i) => (
-            <motion.div key={i} variants={fadeUp}>
+            <div key={i} className="animate-fade-in" style={{ animationDelay: `${i * 0.06}s` }}>
               <Card className="h-full hover:shadow-md transition-shadow group">
                 <CardContent className="p-6 flex flex-col items-start gap-3">
                   <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
@@ -150,9 +136,9 @@ const Index = () => (
                   </Link>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
 
@@ -160,32 +146,24 @@ const Index = () => (
     <section className="bg-secondary py-16 lg:py-20">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.h2 variants={fadeUp} className="text-2xl lg:text-3xl font-serif font-bold mb-4">
+          <div>
+            <h2 className="text-2xl lg:text-3xl font-serif font-bold mb-4">
               Hair Transplant Surgeon Prayagraj
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-muted-foreground mb-4 leading-relaxed">
+            </h2>
+            <p className="text-muted-foreground mb-4 leading-relaxed">
               Dr. Dheeraj Kumar Patwa (D.K. Patwa) is a highly qualified dermatologist in Prayagraj with over 13 years of clinical experience. He completed his MBBS from Aligarh Muslim University (AMU) and MD in Dermatology from the prestigious Institute of Medical Sciences, BHU (IMS-BHU).
-            </motion.p>
-            <motion.p variants={fadeUp} className="text-muted-foreground mb-6 leading-relaxed">
+            </p>
+            <p className="text-muted-foreground mb-6 leading-relaxed">
               As a member of the Cosmetic Dermatology Society of India (CDSI), Dr. Patwa stays at the forefront of dermatological advancements. He specializes in hair transplant surgery, acne treatment, laser procedures, anti-aging therapies, and comprehensive skin care for patients across Prayagraj and Allahabad.
-            </motion.p>
-            <motion.div variants={fadeUp}>
-              <Button asChild variant="outline">
-                <Link to="/about">Read Full Bio →</Link>
-              </Button>
-            </motion.div>
-          </motion.div>
-          <motion.blockquote
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-card p-8 rounded-xl border italic text-lg font-serif text-foreground leading-relaxed"
-          >
+            </p>
+            <Button asChild variant="outline">
+              <Link to="/about">Read Full Bio →</Link>
+            </Button>
+          </div>
+          <blockquote className="bg-card p-8 rounded-xl border italic text-lg font-serif text-foreground leading-relaxed">
             "For me, my work is everything. My profession is my world."
             <footer className="mt-4 not-italic text-sm text-muted-foreground font-sans">— Dr. D.K. Patwa</footer>
-          </motion.blockquote>
+          </blockquote>
         </div>
       </div>
     </section>
@@ -198,19 +176,17 @@ const Index = () => (
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {testimonials.map((t, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-              <Card className="h-full">
-                <CardContent className="p-6">
-                  <div className="flex gap-0.5 mb-3">
-                    {Array.from({ length: t.rating }).map((_, j) => (
-                      <Star key={j} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">"{t.text}"</p>
-                  <p className="text-sm font-semibold">{t.name}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <Card key={i} className="h-full">
+              <CardContent className="p-6">
+                <div className="flex gap-0.5 mb-3">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <Star key={j} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">"{t.text}"</p>
+                <p className="text-sm font-semibold">{t.name}</p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

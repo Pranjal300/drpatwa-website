@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import SEOHead from '@/components/SEOHead';
-
-
 
 import gallery3 from '@/assets/gallery/gallery-3.png';
 import gallery4 from '@/assets/gallery/gallery-4.png';
@@ -76,29 +73,23 @@ const Gallery = () => {
           </div>
 
           {/* Grid */}
-          <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <AnimatePresence>
-              {filtered.map(item => (
-                <motion.div
-                  key={item.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  className="aspect-square rounded-lg overflow-hidden bg-muted border border-border cursor-pointer hover:shadow-lg transition-shadow"
-                  onClick={() => setLightbox(item.id)}
-                >
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    loading="lazy"
-                    className="w-full h-full object-cover"
-                  />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {filtered.map(item => (
+              <div
+                key={item.id}
+                className="aspect-square rounded-lg overflow-hidden bg-muted border border-border cursor-pointer hover:shadow-lg transition-shadow"
+                onClick={() => setLightbox(item.id)}
+              >
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
 
           <p className="text-center text-sm text-muted-foreground mt-8">
             * Actual patient results. Individual outcomes may vary. Photos used with patient consent.
@@ -107,27 +98,19 @@ const Gallery = () => {
       </section>
 
       {/* Lightbox */}
-      <AnimatePresence>
-        {lightbox !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
-            onClick={() => setLightbox(null)}
-          >
-            <motion.img
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-              src={galleryItems.find(g => g.id === lightbox)?.src}
-              alt={galleryItems.find(g => g.id === lightbox)?.alt}
-              className="max-w-full max-h-[85vh] rounded-xl object-contain"
-              onClick={e => e.stopPropagation()}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {lightbox !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 animate-fade-in"
+          onClick={() => setLightbox(null)}
+        >
+          <img
+            src={galleryItems.find(g => g.id === lightbox)?.src}
+            alt={galleryItems.find(g => g.id === lightbox)?.alt}
+            className="max-w-full max-h-[85vh] rounded-xl object-contain"
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   );
 };

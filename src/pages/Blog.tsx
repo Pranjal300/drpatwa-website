@@ -1,5 +1,4 @@
 import { Link, useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SEOHead from '@/components/SEOHead';
@@ -242,11 +241,8 @@ const BlogList = () => (
       <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
         <div className="space-y-8">
           {posts.map(post => (
-            <motion.article
+            <article
               key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               className="bg-card border rounded-xl p-6 hover:shadow-md transition-shadow"
             >
               <div className="flex flex-wrap gap-2 mb-3">
@@ -265,7 +261,7 @@ const BlogList = () => (
               <Link to={`/blog/${post.slug}`} className="text-sm text-primary font-medium mt-3 inline-block hover:underline">
                 Read more →
               </Link>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>
@@ -287,7 +283,6 @@ const BlogPostPage = () => {
     );
   }
 
-  // Convert markdown-ish content to basic HTML
   const renderContent = (text: string) => {
     return text
       .split('\n')
@@ -306,58 +301,67 @@ const BlogPostPage = () => {
         if (trimmed.startsWith('*') && trimmed.endsWith('*') && !trimmed.startsWith('**')) {
           return <p key={i} className="italic text-sm text-muted-foreground mt-4">{trimmed.replace(/^\*|\*$/g, '')}</p>;
         }
-        // Handle inline links and bold
-        const parts = trimmed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" class="text-primary hover:underline">$1</a>');
-        return <p key={i} className="mb-3 leading-relaxed" dangerouslySetInnerHTML={{ __html: parts }} />;
+        const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+        const parts: React.ReactNode[] = [];
+        let lastIndex = 0;
+        let match;
+        while ((match = linkRegex.exec(trimmed)) !== null) {
+          if (match.index > lastIndex) parts.push(trimmed.substring(lastIndex, match.index));
+          parts.push(<Link key={`${i}-${match.index}`} to={match[2]} className="text-primary hover:underline">{match[1]}</Link>);
+          lastIndex = match.index + match[0].length;
+        }
+        if (lastIndex < trimmed.length) parts.push(trimmed.substring(lastIndex));
+        return <p key={i} className="text-muted-foreground leading-relaxed mb-3">{parts.length > 0 ? parts : trimmed}</p>;
       });
+  };
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "author": { "@type": "Person", "name": "Dr. D.K. Patwa" },
+    "datePublished": post.date,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Dr. Patwa Skin Hair Laser and Aesthetic Clinic"
+    }
   };
 
   return (
     <>
-      <SEOHead
-        title={post.metaTitle}
-        description={post.metaDesc}
-        canonical={`https://drpatwa.com/blog/${post.slug}`}
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          "headline": post.title,
-          "author": { "@type": "Person", "name": "Dr. D.K. Patwa" },
-          "datePublished": post.date,
-          "publisher": { "@type": "Organization", "name": "Dr. Patwa Skin Care & Hair Clinic" }
-        }}
-      />
+      <SEOHead title={post.metaTitle} description={post.metaDesc} canonical={`https://drpatwa.com/blog/${post.slug}`} schema={articleSchema} />
 
-      <article className="py-12">
+      <section className="bg-secondary py-12 lg:py-16">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
-          <Link to="/blog" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary mb-6">
-            <ArrowLeft className="w-4 h-4" /> Back to Blog
-          </Link>
-
-          <div className="flex flex-wrap gap-2 mb-4">
+          <Button asChild variant="ghost" size="sm" className="mb-4">
+            <Link to="/blog"><ArrowLeft className="w-4 h-4 mr-1" /> Back to Blog</Link>
+          </Button>
+          <div className="flex flex-wrap gap-2 mb-3">
             {post.tags.map(t => (
               <span key={t} className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">{t}</span>
             ))}
           </div>
-
-          <h1 className="text-2xl lg:text-3xl font-serif font-bold mb-4">{post.title}</h1>
-
-          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8 border-b border-border pb-6">
+          <h1 className="text-2xl lg:text-3xl font-serif font-bold mb-3">{post.title}</h1>
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <span className="flex items-center gap-1"><User className="w-4 h-4" /> Dr. D.K. Patwa</span>
             <span className="flex items-center gap-1"><Calendar className="w-4 h-4" /> {new Date(post.date).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
           </div>
+        </div>
+      </section>
 
-          <div className="prose prose-sm max-w-none text-foreground">
-            {renderContent(post.content)}
-          </div>
-
-          <div className="mt-12 p-6 bg-secondary rounded-xl text-center">
-            <h3 className="font-serif font-bold text-lg mb-2">Need Expert Skin or Hair Care?</h3>
-            <p className="text-sm text-muted-foreground mb-4">Book a consultation with Dr. D.K. Patwa in Prayagraj today.</p>
-            <Button asChild><Link to="/contact">Book Appointment</Link></Button>
-          </div>
+      <article className="py-10 lg:py-14">
+        <div className="container mx-auto px-4 lg:px-8 max-w-3xl prose-sm">
+          {renderContent(post.content)}
         </div>
       </article>
+
+      <section className="bg-secondary py-10">
+        <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
+          <h2 className="text-xl font-serif font-bold mb-3">Need Expert Skin or Hair Care?</h2>
+          <p className="text-muted-foreground mb-4">Book a consultation with Dr. D.K. Patwa in Prayagraj.</p>
+          <Button asChild><Link to="/contact">Book Appointment</Link></Button>
+        </div>
+      </section>
     </>
   );
 };

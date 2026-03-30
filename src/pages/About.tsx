@@ -1,13 +1,7 @@
-import { motion } from 'framer-motion';
 import { GraduationCap, Briefcase, Award, Heart } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import doctorImg2 from '@/assets/doctor-2.png';
 import doctorImg3 from '@/assets/doctor-3.png';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
 
 const timeline = [
   { year: '2012', title: 'MBBS – Aligarh Muslim University (AMU)', icon: GraduationCap, desc: 'Completed Bachelor of Medicine and Bachelor of Surgery from one of India\'s most prestigious medical institutions.' },
@@ -37,29 +31,24 @@ const About = () => (
     <section className="bg-secondary py-16 lg:py-20">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
-            <motion.p variants={fadeUp} className="text-accent font-medium text-sm uppercase tracking-wider mb-2">About the Doctor</motion.p>
-            <motion.h1 variants={fadeUp} className="text-3xl lg:text-4xl font-serif font-bold mb-4">
+          <div className="animate-fade-in">
+            <p className="text-accent font-medium text-sm uppercase tracking-wider mb-2">About the Doctor</p>
+            <h1 className="text-3xl lg:text-4xl font-serif font-bold mb-4">
               Dr. Dheeraj Kumar Patwa (D.K. Patwa)
-            </motion.h1>
-            <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed mb-4">
+            </h1>
+            <p className="text-muted-foreground leading-relaxed mb-4">
               Dr. D.K. Patwa is a renowned dermatologist, venereologist, and hair transplant surgeon based in Prayagraj (formerly Allahabad), Uttar Pradesh. With over 13 years of clinical expertise, he has helped thousands of patients achieve healthier skin and hair through evidence-based, patient-centric treatments.
-            </motion.p>
-            <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed mb-4">
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-4">
               His qualifications include MBBS from Aligarh Muslim University (AMU) — one of India's top medical schools — and an MD in Dermatology, Venereology & Leprosy from the Institute of Medical Sciences, BHU (IMS-BHU), Varanasi. This rigorous academic background, combined with hands-on experience across multiple hospitals, makes him one of the most sought-after skin specialists in Prayagraj and surrounding areas.
-            </motion.p>
-            <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed">
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
               Dr. Patwa is an active member of the Cosmetic Dermatology Society of India (CDSI) and keeps himself updated with the latest advances in medical and cosmetic dermatology. He is fluent in both Hindi and English, ensuring comfortable communication for all patients.
-            </motion.p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7 }}
-            className="flex justify-center"
-          >
-            <img src={doctorImg2} alt="Dr DK Patwa skin specialist Prayagraj" className="w-72 lg:w-96 rounded-2xl shadow-xl" loading="lazy" />
-          </motion.div>
+            </p>
+          </div>
+          <div className="flex justify-center animate-fade-in" style={{ animationDelay: '0.15s' }}>
+            <img src={doctorImg2} alt="Dr DK Patwa skin specialist Prayagraj" className="w-72 lg:w-96 rounded-2xl shadow-xl" loading="lazy" decoding="async" />
+          </div>
         </div>
       </div>
     </section>
@@ -74,13 +63,10 @@ const About = () => (
           <div className="absolute left-[19px] top-0 bottom-0 w-px bg-border" />
           <div className="space-y-8">
             {timeline.map((t, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
-                className="flex gap-5 relative group"
+                className="flex gap-5 relative group animate-fade-in"
+                style={{ animationDelay: `${i * 0.08}s` }}
               >
                 <div className="flex flex-col items-center z-10">
                   <div className="p-2.5 rounded-full bg-primary text-primary-foreground shadow-sm ring-4 ring-background">
@@ -92,7 +78,7 @@ const About = () => (
                   <h3 className="font-serif font-semibold text-lg mt-2">{t.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{t.desc}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -103,7 +89,7 @@ const About = () => (
     <section className="bg-secondary py-16 lg:py-20">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <img src={doctorImg3} alt="Dr Patwa at clinic Prayagraj" className="w-full max-w-md mx-auto rounded-2xl shadow-lg" loading="lazy" />
+          <img src={doctorImg3} alt="Dr Patwa at clinic Prayagraj" className="w-full max-w-md mx-auto rounded-2xl shadow-lg" loading="lazy" decoding="async" />
           <div>
             <h2 className="font-serif font-bold mb-4 text-3xl">Philosophy & Approach</h2>
             <p className="text-muted-foreground leading-relaxed mb-4 border-2 font-medium text-2xl">

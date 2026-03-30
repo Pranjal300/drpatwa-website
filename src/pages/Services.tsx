@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { Plus, Sparkles, Scissors, Droplets, Sun, Shield, Stethoscope, Zap, Bug, Flame, Pill, Syringe, Eraser } from 'lucide-react';
+import { Sparkles, Scissors, Droplets, Sun, Shield, Stethoscope, Zap, Bug, Flame, Pill, Syringe, Eraser } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import SEOHead from '@/components/SEOHead';
 
@@ -142,9 +141,9 @@ const Services = () => (
 
     <section className="bg-secondary py-16 lg:py-20">
       <div className="container mx-auto px-4 lg:px-8 text-center">
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-3xl lg:text-4xl font-serif font-bold mb-3">
+        <h1 className="text-3xl lg:text-4xl font-serif font-bold mb-3">
           Our Skin & Hair Treatment Services
-        </motion.h1>
+        </h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Comprehensive dermatology services by Dr. D.K. Patwa — your trusted skin doctor in Prayagraj. Tap on any service to learn more.
         </p>
@@ -154,38 +153,31 @@ const Services = () => (
     <section className="py-12 lg:py-16">
       <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
         <Accordion type="single" collapsible className="space-y-3">
-          {services.map((s, i) => (
-            <motion.div
-              key={s.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.04 }}
-            >
-              <AccordionItem value={s.id} className="bg-card border rounded-xl px-5 data-[state=open]:shadow-md transition-shadow">
-                <AccordionTrigger className="hover:no-underline py-5 gap-3">
-                  <div className="flex items-center gap-4 text-left">
-                    <div className="p-2.5 rounded-lg bg-primary/10 text-primary shrink-0">
-                      <s.icon className="w-5 h-5" />
-                    </div>
-                    <span className="font-serif font-semibold text-base lg:text-lg">{s.title}</span>
+          {services.map((s) => (
+            <AccordionItem key={s.id} value={s.id} className="bg-card border rounded-xl px-5 data-[state=open]:shadow-md transition-shadow">
+              <AccordionTrigger className="hover:no-underline py-5 gap-3">
+                <div className="flex items-center gap-4 text-left">
+                  <div className="p-2.5 rounded-lg bg-primary/10 text-primary shrink-0">
+                    <s.icon className="w-5 h-5" />
                   </div>
-                </AccordionTrigger>
-                <AccordionContent className="pb-5">
-                  <p className="text-muted-foreground leading-relaxed mb-4 pl-[52px]">{s.desc}</p>
-                  {s.faq.length > 0 && (
-                    <div className="pl-[52px] space-y-3">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-primary">Frequently Asked</p>
-                      {s.faq.map((f, j) => (
-                        <div key={j} className="bg-secondary/50 rounded-lg p-4">
-                          <p className="text-sm font-semibold mb-1">{f.q}</p>
-                          <p className="text-sm text-muted-foreground">{f.a}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </AccordionContent>
-              </AccordionItem>
-            </motion.div>
+                  <span className="font-serif font-semibold text-base lg:text-lg">{s.title}</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="pb-5">
+                <p className="text-muted-foreground leading-relaxed mb-4 pl-[52px]">{s.desc}</p>
+                {s.faq.length > 0 && (
+                  <div className="pl-[52px] space-y-3">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">Frequently Asked</p>
+                    {s.faq.map((f, j) => (
+                      <div key={j} className="bg-secondary/50 rounded-lg p-4">
+                        <p className="text-sm font-semibold mb-1">{f.q}</p>
+                        <p className="text-sm text-muted-foreground">{f.a}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </AccordionContent>
+            </AccordionItem>
           ))}
         </Accordion>
       </div>
