@@ -148,10 +148,12 @@ const Admin = () => {
     morning_timing: '🌅 Morning Timing',
     evening_timing: '🌆 Evening Timing',
     sunday_timing: '📅 Sunday',
-    google_rating: '⭐ Google Rating',
-    google_review_count: '📊 Review Count',
+    google_rating: '⭐ Google Rating (auto-synced)',
+    google_review_count: '📊 Review Count (auto-synced)',
     address: '📍 Address',
   };
+
+  const readOnlyKeys = ['google_rating', 'google_review_count'];
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   if (!isAdmin) return null;
