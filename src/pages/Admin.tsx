@@ -96,11 +96,22 @@ const Admin = () => {
     toast({ title: 'Blog deleted' });
   };
 
+  const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+  const MAX_FILE_SIZE_MB = 5;
+
   const uploadImage = async (file: File) => {
-    const ext = file.name.split('.').pop();
+    if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      toast({ title: 'Invalid file type', description: 'Only JPEG, PNG, WebP, and GIF images are allowed.', variant: 'destructive' });
+      return null;
+    }
+    if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+      toast({ title: 'File too large', description: `Max allowed size is ${MAX_FILE_SIZE_MB}MB.`, variant: 'destructive' });
+      return null;
+    }
+    const ext = file.type.split('/')[1];
     const path = `${Date.now()}.${ext}`;
-    const { error } = await supabase.storage.from('site-assets').upload(path, file);
-    if (error) { toast({ title: 'Upload failed', variant: 'destructive' }); return null; }
+    const { error } = await supabase.storage.from('site-assets').upload(path, file, { contentType: file.type });
+    if (error) { toast({ title: 'Upload failed', description: error.message, variant: 'destructive' }); return null; }
     const { data } = supabase.storage.from('site-assets').getPublicUrl(path);
     return data.publicUrl;
   };
