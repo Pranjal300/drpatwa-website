@@ -129,7 +129,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   const setLang = useCallback((newLang: Language) => {
     setLangState(newLang);
-    try { localStorage.setItem('lang', newLang); } catch {}
+    try { localStorage.setItem('lang', newLang); } catch (_e) { /* storage unavailable */ }
   }, []);
 
   const t = useCallback((key: string): string => {

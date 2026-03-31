@@ -35,7 +35,20 @@ const Contact = () => {
       toast({ title: 'Please enter a valid 10-digit phone number', variant: 'destructive' });
       return;
     }
-    toast({ title: 'Appointment Request Sent!', description: 'We will confirm your appointment within 24 hours.' });
+
+    const lines = [
+      `Hello Dr. Patwa, I would like to book an appointment.`,
+      `Name: ${form.name.trim()}`,
+      `Phone: ${form.phone.trim()}`,
+      form.email.trim() ? `Email: ${form.email.trim()}` : '',
+      form.service ? `Service: ${form.service}` : '',
+      form.message.trim() ? `Message: ${form.message.trim()}` : '',
+    ].filter(Boolean).join('\n');
+
+    const waUrl = `https://wa.me/919560294926?text=${encodeURIComponent(lines)}`;
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+    toast({ title: 'Redirecting to WhatsApp...', description: 'Your appointment details are pre-filled. Just hit Send!' });
     setForm({ name: '', phone: '', email: '', service: '', message: '' });
   };
 
