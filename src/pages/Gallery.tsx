@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { X } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 
 import gallery3 from '@/assets/gallery/gallery-3.png';
@@ -27,6 +28,14 @@ const Gallery = () => {
   const [active, setActive] = useState('All');
   const [lightbox, setLightbox] = useState<number | null>(null);
   const filtered = active === 'All' ? galleryItems : galleryItems.filter(g => g.category === active);
+  const lightboxItem = lightbox !== null ? galleryItems.find(g => g.id === lightbox) : null;
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setLightbox(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox]);
 
   return (
     <>
@@ -98,14 +107,21 @@ const Gallery = () => {
       </section>
 
       {/* Lightbox */}
-      {lightbox !== null && (
+      {lightboxItem && (
         <div
           className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setLightbox(null)}
         >
+          <button
+            onClick={() => setLightbox(null)}
+            className="absolute top-4 right-4 text-white/80 hover:text-white bg-black/40 hover:bg-black/60 rounded-full p-2 transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
           <img
-            src={galleryItems.find(g => g.id === lightbox)?.src}
-            alt={galleryItems.find(g => g.id === lightbox)?.alt}
+            src={lightboxItem.src}
+            alt={lightboxItem.alt}
             className="max-w-full max-h-[85vh] rounded-xl object-contain"
             onClick={e => e.stopPropagation()}
           />

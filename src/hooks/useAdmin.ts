@@ -25,25 +25,6 @@ export const useAdmin = () => {
       setLoading(false);
     });
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
-      if (currentUser) {
-        supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', currentUser.id)
-          .eq('role', 'admin')
-          .maybeSingle()
-          .then(({ data }) => {
-            setIsAdmin(!!data);
-            setLoading(false);
-          });
-      } else {
-        setLoading(false);
-      }
-    });
-
     return () => subscription.unsubscribe();
   }, []);
 

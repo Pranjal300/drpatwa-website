@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Settings, FileText, Image, LogOut, Plus, Trash2, Save, Eye, EyeOff } from 'lucide-react';
+import { Settings, FileText, Image, LogOut, Plus, Trash2, Save } from 'lucide-react';
 
 type Setting = { key: string; value: string };
 type BlogPost = { id: string; title: string; slug: string; excerpt: string | null; content: string; image_url: string | null; published: boolean; created_at: string };
@@ -56,15 +56,25 @@ const Admin = () => {
     if (galleryRes.data) setGallery(galleryRes.data as GalleryImage[]);
   };
 
+  const loadBlogs = async () => {
+    const { data } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false });
+    if (data) setBlogs(data as BlogPost[]);
+  };
+
+  const loadGallery = async () => {
+    const { data } = await supabase.from('gallery_images').select('*').order('sort_order');
+    if (data) setGallery(data as GalleryImage[]);
+  };
+
   const updateSetting = (key: string, value: string) => {
     setSettings(prev => prev.map(s => s.key === key ? { ...s, value } : s));
   };
 
   const saveSettings = async () => {
     setSaving(true);
-    for (const s of settings) {
-      await supabase.from('site_settings').update({ value: s.value }).eq('key', s.key);
-    }
+    await Promise.all(settings.map(s =>
+      supabase.from('site_settings').update({ value: s.value }).eq('key', s.key)
+    ));
     queryClient.invalidateQueries({ queryKey: ['site-settings'] });
     toast({ title: 'Settings saved!' });
     setSaving(false);
@@ -85,14 +95,14 @@ const Admin = () => {
     }
     setBlogForm({ title: '', slug: '', excerpt: '', content: '', image_url: '', published: false });
     setEditingBlog(null);
-    await loadData();
+    await loadBlogs();
     toast({ title: editingBlog ? 'Blog updated!' : 'Blog created!' });
     setSaving(false);
   };
 
   const deleteBlog = async (id: string) => {
     await supabase.from('blog_posts').delete().eq('id', id);
-    await loadData();
+    await loadBlogs();
     toast({ title: 'Blog deleted' });
   };
 
@@ -126,30 +136,26 @@ const Admin = () => {
       sort_order: gallery.length,
     });
     setGalleryForm({ image_url: '', alt_text: '', category: 'results' });
-    await loadData();
+    await loadGallery();
     toast({ title: 'Image added to gallery!' });
     setSaving(false);
   };
 
   const deleteGalleryImage = async (id: string) => {
     await supabase.from('gallery_images').delete().eq('id', id);
-    await loadData();
+    await loadGallery();
     toast({ title: 'Image removed' });
   };
 
-  const handleGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const makeUploadHandler = (setter: (url: string) => void) => async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const url = await uploadImage(file);
-    if (url) setGalleryForm(f => ({ ...f, image_url: url }));
+    if (url) setter(url);
   };
 
-  const handleBlogImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const url = await uploadImage(file);
-    if (url) setBlogForm(f => ({ ...f, image_url: url }));
-  };
+  const handleGalleryUpload = makeUploadHandler(url => setGalleryForm(f => ({ ...f, image_url: url })));
+  const handleBlogImageUpload = makeUploadHandler(url => setBlogForm(f => ({ ...f, image_url: url })));
 
   const settingLabel: Record<string, string> = {
     animation_mode: '🎬 Animation Mode',
@@ -163,8 +169,6 @@ const Admin = () => {
     google_review_count: '📊 Review Count',
     address: '📍 Address',
   };
-
-  const readOnlyKeys: string[] = [];
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   if (!isAdmin) return null;
@@ -206,8 +210,6 @@ const Admin = () => {
                     </div>
                   ) : s.key === 'address' ? (
                     <Textarea value={s.value} onChange={e => updateSetting(s.key, e.target.value)} rows={2} />
-                  ) : readOnlyKeys.includes(s.key) ? (
-                    <Input value={s.value} disabled className="opacity-70" />
                   ) : (
                     <Input value={s.value} onChange={e => updateSetting(s.key, e.target.value)} />
                   )}

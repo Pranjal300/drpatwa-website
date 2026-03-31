@@ -87,7 +87,7 @@ export const useScrollRevealList = (count: number) => {
     });
 
     return () => observer.disconnect();
-  }, [mode, count]);
+  }, [mode]);
 
   const setRef = (index: number) => (el: HTMLElement | null) => {
     refs.current[index] = el;

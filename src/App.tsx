@@ -18,13 +18,15 @@ import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
 import { useAnimationClass } from "./hooks/useAnimationClass";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
 const PublicLayout = ({ children }: { children: React.ReactNode }) => (
   <>
     <Navbar />
-    <main className="min-h-screen">{children}</main>
+    <main className="min-h-screen pb-14 md:pb-0">{children}</main>
     <Footer />
     <WhatsAppButton />
     <MobileBookingBar />
@@ -36,6 +38,12 @@ const AnimationClassManager = () => {
   return null;
 };
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -44,6 +52,7 @@ const App = () => (
         <Sonner />
         <AnimationClassManager />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<Admin />} />

@@ -46,7 +46,7 @@ const Contact = () => {
     ].filter(Boolean).join('\n');
 
     const waUrl = `https://wa.me/919560294926?text=${encodeURIComponent(lines)}`;
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    window.open(waUrl, '_blank', 'noopener');
 
     toast({ title: 'Redirecting to WhatsApp...', description: 'Your appointment details are pre-filled. Just hit Send!' });
     setForm({ name: '', phone: '', email: '', service: '', message: '' });
