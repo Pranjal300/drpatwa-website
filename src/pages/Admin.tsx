@@ -101,7 +101,8 @@ const Admin = () => {
   };
 
   const deleteBlog = async (id: string) => {
-    await supabase.from('blog_posts').delete().eq('id', id);
+    const { error } = await supabase.from('blog_posts').delete().eq('id', id);
+    if (error) { toast({ title: 'Delete failed', description: error.message, variant: 'destructive' }); return; }
     await loadBlogs();
     toast({ title: 'Blog deleted' });
   };
@@ -129,12 +130,13 @@ const Admin = () => {
   const addGalleryImage = async () => {
     if (!galleryForm.image_url) return;
     setSaving(true);
-    await supabase.from('gallery_images').insert({
+    const { error } = await supabase.from('gallery_images').insert({
       image_url: galleryForm.image_url,
       alt_text: galleryForm.alt_text || null,
       category: galleryForm.category,
       sort_order: gallery.length,
     });
+    if (error) { toast({ title: 'Failed to add image', description: error.message, variant: 'destructive' }); setSaving(false); return; }
     setGalleryForm({ image_url: '', alt_text: '', category: 'results' });
     await loadGallery();
     toast({ title: 'Image added to gallery!' });
@@ -142,7 +144,8 @@ const Admin = () => {
   };
 
   const deleteGalleryImage = async (id: string) => {
-    await supabase.from('gallery_images').delete().eq('id', id);
+    const { error } = await supabase.from('gallery_images').delete().eq('id', id);
+    if (error) { toast({ title: 'Delete failed', description: error.message, variant: 'destructive' }); return; }
     await loadGallery();
     toast({ title: 'Image removed' });
   };
